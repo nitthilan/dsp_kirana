@@ -1,0 +1,11 @@
+Sitemap: http://www.brightboard.co.in/Sitemap.xml
+User-agent: *
+Disallow: /static_images/
+Disallow: /public_files/
+Disallow: /non_bower/
+Disallow: /node_modules/
+Disallow: /module/
+Disallow: /public_files/
+Disallow: /css/
+Disallow: /bower_components/
+Disallow: /.tmp/

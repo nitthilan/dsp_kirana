@@ -1,0 +1,95 @@
+<div ng-include="'html/templates/userinfo_login.html'"></div>
+
+<div ng-show="(process_state==0)" class="container text-center"><div class="row"><div class="col-sm-12">
+  <div class="panel panel-default"><div class="panel-body ">
+    <div class="input-group">
+      <input type="text" ng-model="notebook_name" class="form-control" placeholder="Search/Create Notebook">
+      <span class="input-group-btn"><button class="btn btn-success" ng-click="createNotebook(notebook_name)"type="button">Create</button></span>
+    </div><!-- /input-group -->
+  </div></div>
+  <div class="panel panel-default"><div class="panel-body">
+    <div ng-repeat="notebook in NotebookListService.notebook_list | filter:notebook_name track by $index " class="col-sm-3">
+      <div class="thumbnail">
+        <img ng-src="{{NotebookListService.notebook_list_thumbnail[NotebookListService.notebook_list.indexOf(notebook)].thumbnail}}" class="img-responsive center-block" alt="Empty notebook">
+        <div class="caption">
+          <h5>{{notebook._id}}</h5>
+          <button type="button" ng-click="selectNotebook(notebook);" class="btn btn-success btn-xs">select</button>
+       </div>
+      </div>
+    </div>
+  </div></div>
+</div></div></div>
+<div ng-show="(process_state==1)" class="container text-center"><div class="row"><div class="col-sm-12">
+  <div class="panel panel-default"><div class="panel-body ">
+    <button type="button" ng-click="process_state = process_state-1;" class="btn">Back</button>
+    <a href="/#/imagecleaner" class="btn btn-success" type="button">Add Pages</a>
+    <button type="button" ng-click="process_state=2;" class="btn btn-success">Fullview</button>
+  </div></div>
+  <div class="panel panel-default">
+    <div class="panel-heading">{{SelectedNotebookService.selected_notebook._id}}</div>
+    <div class="panel-body">
+      <button ng-show="save_notebook_button" type="button" ng-click="saveNotebook()" class="btn btn-success">Save</button>
+    </div>
+    <div class="panel-body">
+      <div ng-show="SelectedNotebookService.selected_notebook_page_list.length" class="thumbnail col-sm-3">
+        <!-- img ng-src="{{page.data}}" class="img-responsive center-block" alt="Responsive image"-->
+        <img ng_show="SelectedNotebookService.selected_notebook_thumbnail" ng-src="{{SelectedNotebookService.selected_notebook_thumbnail.thumbnail}}" class="img-responsive center-block" alt="No Image">
+        <div class="caption">
+          <p>Thumbnail</p>
+          <p>{{SelectedNotebookService.selected_notebook_thumbnail.displayName | limitTo: 20 }}</p>
+          <p><div class="input-group input-group-xs col-sm-6">
+            <span class="input-group-btn">
+              <button ng-click="setThumbnail(thumbnail_page_num)" class="btn btn-success btn-xs" type="button">Choose</button>
+            </span>
+            <input type="number" min='0' max="{{SelectedNotebookService.selected_notebook_page_list.length-1}}" ng-model="thumbnail_page_num" class="form-control input-xs" placeholder=" page no.">
+          </div><!-- /input-group --></p>
+       </div>
+      </div>
+      <div ng-repeat="page in SelectedNotebookService.selected_notebook_page_list track by $index" class="col-sm-3">
+        <div class="thumbnail">
+          <!-- img ng-src="{{page.data}}" class="img-responsive center-block" alt="Responsive image"-->
+          <img ng-src="{{page.thumbnail}}" class="img-responsive center-block" alt="No Image">
+          <div class="caption">
+            <p>page {{$index}}</p>
+            <p>{{page.displayName | limitTo: 20}}</p>
+            <p>
+              <div class="input-group input-group-xs">
+                <span class="input-group-btn">
+                  <button type="button" ng-click="deletePage($index)" class="btn btn-success btn-xs">Delete</button>
+                  <!-- button type="button" ng-click="addNoteToPage($index)" class="btn btn-success btn-xs">Add Note</button -->
+                  <button ng-click="movePageTo($index, move_to_position)" class="btn btn-success btn-xs" type="button">Move</button>
+                </span>
+                <input type="number" min='0' max="{{SelectedNotebookService.selected_notebook_page_list.length-1}}" ng-model="move_to_position" class="form-control input-xs" placeholder=" to page">
+              </div><!-- /input-group -->
+            </p>
+         </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div></div>
+<div ng-show="(process_state==2)" class="container text-center"><div class="row"><div class="col-sm-12">
+  <div class="panel panel-default">
+    <div class="panel-heading">{{SelectedNotebookService.selected_notebook._id}}</div>
+    <div class="panel-body">
+      <button type="button" ng-click="prevPage()" class="btn btn-success">Prev</button>
+      <button type="button" ng-click="process_state = process_state-1;" class="btn">Edit</button>
+      <button type="button" ng-click="nextPage()" class="btn btn-success">Next</button>
+    </div>
+    <div class="panel-body">
+      <div class="thumbnail">
+        <div class="caption">[{{cur_page_position}}]
+          {{SelectedNotebookService.selected_notebook_page_list[cur_page_position].displayName}}
+        </div>
+        <img ng-src="{{SelectedNotebookService.selected_notebook_page_list[cur_page_position].data}}" class="img-responsive center-block" alt="No Image">
+      </div>
+    </div>
+  </div>
+</div></div></div>
+<div ng-show="hidden_canvas_panel"> <!-- Used to resize images on the browser -->
+<canvas id="imgResizeCanvas">
+          Sorry, your browser doesn't support the &lt;canvas&gt; element.
+</canvas>
+</div>
+
+<div ng-show="userService.is_demo_user" ng-include="'html/templates/request_userinfo_jumbotron.html'"></div>

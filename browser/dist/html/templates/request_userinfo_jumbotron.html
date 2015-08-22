@@ -1,0 +1,18 @@
+<div ng-show="userProfile.is_demo_user" class="jumbotron">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 text-center">
+        <p>Want to help us build this into a better product? Become a early adopter and keep yourself posted.</p>
+        <div class="col-sm-12">
+          <form name="subscriberForm" class="form-inline">
+            <input type="email" class="form-control" name="email" ng-model="email" placeholder="hi,there@welcome.com">
+            <button class="btn btn-success" ng-click="storemailid()"type="button">Get Notified</button>
+            <a href="mailto:brightboard007@gmail.com?Subject=Keep%20me%20posted%20:)" target="_top" class="btn btn-success" type="button"><span class="glyphicon glyphicon-envelope"></span> Mail Us</a>
+            <a target="_blank" href="https://www.facebook.com/brightboard" class="btn btn-success" type="button">
+              <span class="glyphicon glyphicon-thumbs-up"></span> Like Us</a>
+          </form>
+        </div><!-- /input-group -->
+      </div>
+    </div>
+  </div>
+</div>

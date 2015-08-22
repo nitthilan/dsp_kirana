@@ -1,0 +1,68 @@
+<div ng-include="'html/templates/userinfo_login.html'"></div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="panel panel-default ">
+        <div ng-show="(process_state==0)"  class="panel-body text-center">
+          <button type="submit" ng-disabled="!(process_state>=0)" class="btn btn-success" ng-file-select="preview(myFiles)" ng-model="myFiles" ng-file-change="" ng-multiple="true" ng-accept="'image/*'" tabindex="0">Choose Image</button>
+        </div>
+        <div ng-show="(process_state==1)" class="panel-body text-center">
+          <button type="button" ng-click="process_state = process_state-1;" class="btn">Back</button>
+          <button type="button" ng-click="upload(myFiles)" class="btn btn-success">Clean&Correct</button>
+          <!-- p><b>Crop:</b> Select corners of region to be cropped. Green dots should help you. <button type="submit" class="btn btn-success btn-xs">:  :</button><br>
+          <b>Font thickness:</b> Controls the marker/pen strokes thickness. Thicker strokes larger Font thickness.<br>
+          <b>Noise threshold:</b> Pixel values lesser than threshold are made zero and above are made white<br></p -->
+          <form class="form-horizontal">
+            <div class="form-group">
+              <div class=" col-sm-4 checkbox"><label><input ng-model="onlycrop" type="checkbox"> <b>Only Crop</b></label></div>
+              <div class="col-sm-4">
+                <label for="r1" class="control-label">Font thickness({{radius1}}) : </label>
+                <input ng-model="radius1" type="range" min="1" max="5"  id="r1" placeholder="r1">
+              </div>
+              <div class="col-sm-4">
+                <label for="t1" class="control-label">Noise threshold ({{threshold1}}) :</label>
+                <input ng-model="threshold1" type="range" min="100" max="255" id="t1" placeholder="t1">
+              </div>
+            </div>
+          </form>
+          <p>
+          </p>
+        </div>
+        <div ng-show="(process_state==2)" class="panel-body">
+          <div class="dropdown col-xs-offset-5">
+            <button type="button" ng-click="process_state = process_state-1;" class="btn">Back</button>
+            <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+              Add to
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+              <li ng-show="SelectedNotebookService.selected_notebook" role="presentation"><a role="menuitem" tabindex="-1" href="" ng-click="addPageToNotebook()">{{SelectedNotebookService.selected_notebook._id}}</a></li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" href="/#/notebookmaker" ng-click="addPageToPending()">Choose Notebook</a></li>
+            </ul>
+            <button type="button" ng-click="process_state = 0;" class="btn">Start Over</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div resize-canvas class="col-sm-12">
+      <div ng-show="(process_state<=1)" class="thumbnail">
+        <canvas id="inputCanvas">
+          Sorry, your browser doesn't support the &lt;canvas&gt; element.
+        </canvas>
+      </div>
+      <div ng-show="(process_state==2)" class="thumbnail">
+        <a ng-href="{{output_preview}}" download>
+          <img ng-src="{{output_preview}}" class="img-responsive center-block" alt="Responsive image">
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<div ng-show="hidden_canvas_panel"> <!-- Used to resize images on the browser -->
+<canvas id="imgResizeCanvas">
+          Sorry, your browser doesn't support the &lt;canvas&gt; element.
+</canvas>
+</div>
+<div ng-show="userService.is_demo_user" ng-include="'html/templates/request_userinfo_jumbotron.html'"></div>
+

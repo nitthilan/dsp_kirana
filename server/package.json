@@ -1,0 +1,52 @@
+{
+  "name": "dsp_kirana",
+  "version": "0.0.1",
+  "description": "handwritten image processing",
+  "main": "app/setup/app.js",
+  "scripts": {
+    "start": "node app/setup/main.js | ./node_modules/.bin/bunyan"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nitthilan"
+  },
+  "keywords": [
+    "whiteboard",
+    "image processing",
+    "python",
+    "opencv"
+  ],
+  "author": "kjn",
+  "license": "BSD",
+  "dependencies": {
+    "mongoose": "~3.8.4",
+    "restify": "2.8.4",
+    "client-sessions": "~0.6.0",
+    "bunyan": "~0.22.1",
+    "node-restify-validation": "0.0.6",
+    "crypto": "0.0.3",
+    "emailjs": "~0.3.6",
+    "socket.io": "~1.2.1",
+    "cookie": "~0.1.0",
+    "bcryptjs": "^0.7.12",
+    "body-parser": "^1.6.2",
+    "jwt-simple": "^0.2.0",
+    "lodash": "^2.4.1",
+    "moment": "^2.8.1",
+    "request": "^2.40.0",
+    "connect-multiparty": "~1.2.5",
+    "python-shell": "0.0.3",
+    "mkdirp": "^0.5.0",
+    "socket.io-stream": "^0.6.0",
+    "socketio-jwt": "^2.3.5",
+    "jsonwebtoken": "^3.2.0",
+    "shortid": "^2.1.3"
+  },
+  "devDependencies": {
+    "jasmine-node": "~1.13.0"
+  },
+  "engines": {
+    "node": "0.10.2",
+    "npm": "1.2.15"
+  }
+}

@@ -1,0 +1,65 @@
+
+<div ng-include="'dist/html/templates/userinfo_login.html'"></div>
+
+<div ng-show="(view_state===0)" class="container"><div class="row"><div class="col-sm-12"><div class="panel panel-default ">
+    <div class="panel-body text-center"><div class="col-xs-offset-4 col-xs-4 input-group">
+        <span class="input-group-btn"><button class="btn btn-success" ng-click="MeetingInfoService.create_meeting();view_state = 1;"type="button">Create</button></span>
+        <span class="input-group-btn"><button class="btn btn-success" ng-click="MeetingInfoService.join_meeting(meeting_id); meeting_id = null;view_state = 1"type="button">Join</button></span>
+        <input type="text" ng-model="meeting_id" class="form-control" placeholder="meeting id">
+    </div></div><!-- /input-group -->
+</div></div></div></div>
+<div ng-show="(view_state===1)" class="container"><div class="row"><div class="col-sm-12"><div class="panel panel-default ">
+    <div ng-show=" CameraShareService.state!=='preview'" class="panel-heading text-center">
+        <button ng-show="CameraShareService.state!=='share' " class="btn btn-success" ng-click="CameraShareService.start_preview()"type="button">Share</button>
+        <button ng-show="CameraShareService.state==='share' " class="btn btn-success" ng-click="CameraShareService.stop_share()"type="button">Stop</button>
+        <button class="btn btn-success" ng-click="view_state=2"type="button">Choose</button>
+        <button class="btn btn-success" ng-click="view_state=3"type="button">Info</button>
+        <button class="btn btn-success" ng-click="view_state=4"type="button">Chat</button>
+        <button class="btn btn-success" ng-click="MeetingInfoService.leave_meeting();view_state = 0"type="button">Leave</button>
+    </div>
+    <div ng-show="CameraShareService.state==='preview' " class="panel-heading text-center">
+        <button class="btn btn-success" ng-click="CameraShareService.stop_preview_and_start_share()" type="button">Done</button>
+        <button class="btn btn-success" type="button">Presenter</button>
+        <button class="btn btn-success" type="button">Clean</button>
+    </div>
+    <div class="panel-body">
+        <canvas ng-show="CameraShareService.state==='preview' " id="cam_capture_canvas">
+          Sorry, your browser doesn't support the &lt;canvas&gt; element.
+        </canvas>
+        <img ng-show="CameraShareService.state!=='preview' " ng-src="data:image/jpeg;base64,{{CameraShareService.camera_image_data[CameraShareService.active_camera_image_id].service_data.imageInfo.image}}" alt="..." class="img-thumbnail img-responsive center-block">
+    </div>
+</div></div></div></div>
+
+<div ng-show="(view_state===2)" class="container"><div class="row"><div class="col-sm-12">
+    <div class="list-group">
+        <li class="list-group-item active"><button ng-click="view_state=1" class="btn btn-success" type="button">Back</button> Active Sharers</li>
+        <a tabindex="-1" href="" class="list-group-item" ng-repeat="(user_id, shared_data) in CameraShareService.camera_image_data" ng-click="CameraShareService.set_active_view(user_id); $parent.view_state = 1">{{shared_data.user_info.displayName}}</a>
+    </div>
+</div></div></div>
+
+<div ng-show="(view_state===3)" class="container"><div class="row"><div class="col-sm-12">
+    <div class="list-group">
+        <li class="list-group-item active"><button ng-click="view_state=1" class="btn btn-success" type="button">Back</button> Meeting Id: {{MeetingInfoService.meeting_info._id}}</li>
+        <li class="list-group-item" ng-repeat="(participant,value) in MeetingInfoService.meeting_info.participantsIdArray">{{participant}}</li>
+    </div>
+</div></div></div>
+<div ng-show="(view_state===4)" class="container"><div class="row"><div class="col-sm-12"><div class="panel panel-default ">
+    <div class="panel-heading text-center">
+        <div class="col-xs-offset-4 col-xs-4 input-group">
+            <span class="input-group-btn">
+                <button ng-click="view_state=1" class="btn btn-success" type="button btn-success">Back</button>
+                <button class="btn btn-success" ng-click="ChatService.send_message(message_text); message_text = null;"type="button">Send</button>
+            </span>
+            <input type="text" ng-model="message_text" class="form-control" placeholder="talk">
+        </div>
+    </div>
+    <div class="panel-body"><div class="list-group">
+        <li class="list-group-item" ng-repeat="message in ChatService.message_list| array_reverse ">{{message.user_info.displayName}}::{{message.service_data.text}}</li>
+    </div></div>
+</div></div></div></div>
+
+
+
+<div ng-show="hidden_cam_capture"> <!-- Should be hidden. Used for capturing video input as images -->
+<video id="cam_capture_video">Video stream not available.</video>
+</div>

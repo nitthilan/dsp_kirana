@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en" ng-app="MyApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Brightboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- build:css css/devan.css -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="bower_components/angular-ui-select/dist/select.min.css">
+    <link rel="stylesheet" href="bower_components/ngprogress/ngProgress.css">
+    <link rel="stylesheet" href="non_bower/select2/select2.css">
+    <link rel="stylesheet" href="css/custom.css">
+
+    <!-- endbuild -->
+  </head>
+  <body>
+    <!-- div>Angular seed app: v<span app-version></span></div -->
+    <!-- build:js js/devan.js -->
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bower_components/socket.io-client/socket.io.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/angular-strap/dist/angular-strap.js"></script>
+    <script src="bower_components/angular-strap/dist/angular-strap.tpl.js"></script>
+    <script src="bower_components/ng-file-upload/angular-file-upload-shim.js"></script>
+    <script src="bower_components/ng-file-upload/angular-file-upload.js"></script>
+    <script src="bower_components/angular-socket-io/socket.js"></script>
+    <script src="bower_components/fabric/dist/fabric.js"></script>
+    <script src="bower_components/ngprogress/build/ngProgress.js"></script>
+    <script src="bower_components/angular-ui-select/dist/select.min.js"></script>
+
+    <script src="non_bower/satellizer/satellizer.js"></script>
+    <script src="non_bower/socket.io-stream/socket.io-stream.js"></script>
+    <script src="non_bower/socket.io-stream/getusermedia.bundle.js"></script>
+
+
+    <script src="module/app.js"></script>
+    <!-- Common services -->
+    <script src="module/imagecleaner/resize_service.js"></script>
+    <script src="module/collaborate/alert_service.js"></script>
+
+    <!-- Files related to login module -->
+    <script src="module/login/logout_controller.js"></script>
+    <script src="module/login/account_service.js"></script>
+    <!-- files Related to home page -->
+    <script src="module/home_page/user_data_init_service.js"></script>
+    <script src="module/home_page/home_controller.js"></script>
+    <script src="module/home_page/user_home_controller.js"></script>
+
+    <!-- files Related to collaborate -->
+    <script src="module/collaborate/data_handling_service.js"></script>
+    <script src="module/collaborate/chat_service.js"></script>
+    <script src="module/collaborate/meeting_info_service.js"></script>
+    <script src="module/collaborate/meeting_controller.js"></script>
+    <script src="module/collaborate/camera_service.js"></script>
+    <script src="module/collaborate/video_canvas_service.js"></script>
+    <script src="module/collaborate/camera_share_service.js"></script>
+    <script src="module/collaborate/videocapture_controller.js"></script>
+    <!-- files Related to image cleaning -->
+    <script src="module/imagecleaner/resize_canvas_directive.js"></script>
+    <script src="module/imagecleaner/imagecleaner_controller.js"></script>
+    <!-- files related to notebook maker -->
+    <script src="module/notebookmaker/selected_notebook_service.js"></script>
+    <script src="module/notebookmaker/notebook_list_service.js"></script>
+    <script src="module/notebookmaker/notebookmaker_controller.js"></script>
+    <!-- endbuild -->
+
+    <!-- script src="js/expt_three.js"></script -->
+  </body>
+</html>
+    <!-- script src="../dist/js/devan.js"></script -->
+

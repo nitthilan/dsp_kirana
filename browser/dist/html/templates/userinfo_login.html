@@ -1,0 +1,37 @@
+<div class="container">
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a ng-show="userProfile.logged_in" class="navbar-brand" href="/#/user_home">Brightboard</a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <li ng-if="userProfile.logged_in && !$state.includes('user_home')" ><a href="/#/user_home">Home</a></li>
+          <li ng-if="userProfile.logged_in && !$state.includes('imagecleaner')"><a href="/#/imagecleaner">Clean</a></li>
+          <li ng-if="userProfile.logged_in && !$state.includes('notebookmaker')"><a href="/#/notebookmaker">Collate</a></li>
+          <li role="presentation">
+            <a target="_blank" href="https://bitbucket.org/projectdevan/brightboard/issues?status=new&status=open">
+              feedback/bug
+            </a>
+          </li>
+          <li role="presentation">
+            <a target="_blank" href="https://www.facebook.com/brightboard">
+              like us
+            </a>
+          </li>
+          <li ng-if="userProfile.logged_in"><a href="/#/logout">log out</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <p ng-if="userProfile.logged_in && $state.includes('user_home')">Welcome {{userProfile.user_info.displayName}}!</p>
+</div>
+
